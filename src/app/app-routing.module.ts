@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule, Routes } from '@angular/router'; 
-
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { UsersComponent } from './components/users/users.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
@@ -13,7 +12,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent,  },
+  { path: '', component: UsersComponent,  },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent, },
   { path: 'user/add', component: AddUserComponent, },
