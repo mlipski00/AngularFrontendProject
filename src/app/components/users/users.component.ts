@@ -9,13 +9,14 @@ import { User } from '../../models/User';
 })
 export class UsersComponent implements OnInit {
   users: User[];
+  order: string = 'id';
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.userService.getUsers().subscribe(users => {
        this.users = users;
-    }); this.users.sort();
+    });
   }
 
   getUsers() {

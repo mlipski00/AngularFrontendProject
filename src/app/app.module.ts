@@ -15,6 +15,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { UserService } from './services/user.service';
 import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
+import { OrderModule } from 'ngx-order-pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     UsersComponent
   ],
   imports: [
+    OrderModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
