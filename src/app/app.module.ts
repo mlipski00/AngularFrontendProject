@@ -16,7 +16,8 @@ import { UserService } from './services/user.service';
 import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderModule } from 'ngx-order-pipe';
-
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,12 +33,13 @@ import { OrderModule } from 'ngx-order-pipe';
   ],
   imports: [
     OrderModule,
+    FlashMessagesModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, FlashMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,5 +3,5 @@ export interface User {
     username?: string;
     email?: string;
     password?: string;
-    personGroupID?: string
+    person_group_id?: number
 }

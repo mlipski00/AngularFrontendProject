@@ -1,3 +1,58 @@
-<p>
-  add-user works!
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <a routerLink="/" class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Back To Users</a>
+  </div>
+  <div class="col-md-6">
+
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    Add User
+  </div>
+  <div class="card-body">
+    <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+      <div class="form-group">
+        <label for="username">User Name</label>
+        <input type="text" class="form-control" 
+        name="username" 
+        #userName="ngModel" 
+        [ngClass]="{'is-invalid':userName.errors && userName.touched}"
+          [(ngModel)]="user.username" 
+          minlength="2" required>
+        <div [hidden]="!userName.errors?.required" class="invalid-feedback">
+          User name required
+        </div>
+        <div [hidden]="!userName.errors?.minlength" class="invalid-feedback">
+          Must be at least 2 characters
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" name="email" #userEmail="ngModel" [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"
+          [(ngModel)]="user.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+        <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">
+          Email required
+        </div>
+        <div [hidden]="!userEmail.errors?.pattern" class="invalid-feedback">
+          Email is not valid
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="phone" #userPassword="ngModel" [ngClass]="{'is-invalid':userPassword.errors && userPassword.touched}"
+          [(ngModel)]="user.password" minlength="8" required>
+        <div [hidden]="!userPassword.errors?.required" class="invalid-feedback">
+          Password is required
+        </div>
+        <div [hidden]="!userPassword.errors?.minlength" class="invalid-feedback">
+          Must be at least 8 characters
+        </div>
+      </div>
+
+      <input type="submit" value="Submit" class="btn btn-primary btn-block">
+    </form>
+  </div>
+</div>
