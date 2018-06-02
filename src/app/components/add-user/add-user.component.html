@@ -9,11 +9,17 @@
 </div>
 
 <div class="card">
-  <div class="card-header">
+    <div [hidden]="!isUserAdding" class="card-body">
+        <h3>Adding user to database...</h3>
+      </div>
+</div>
+
+<div [hidden]="isUserAdding" class="card">
+  <div  class="card-header">
     Add User
   </div>
   <div class="card-body">
-    <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+    <form  #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
       <div class="form-group">
         <label for="username">User Name</label>
         <input type="text" class="form-control" 
@@ -42,8 +48,12 @@
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="phone" #userPassword="ngModel" [ngClass]="{'is-invalid':userPassword.errors && userPassword.touched}"
-          [(ngModel)]="user.password" minlength="8" required>
+        <input type="password" 
+        class="form-control" 
+        name="phone" 
+        #userPassword="ngModel" 
+        [ngClass]="{'is-invalid':userPassword.errors && userPassword.touched}"
+        [(ngModel)]="user.password" minlength="8" required>
         <div [hidden]="!userPassword.errors?.required" class="invalid-feedback">
           Password is required
         </div>
@@ -51,8 +61,29 @@
           Must be at least 8 characters
         </div>
       </div>
-
-      <input type="submit" value="Submit" class="btn btn-primary btn-block">
+      <div class="form-group">
+        <label *ngIf="groups?.length > 0;else noGroupsSelect" for="exampleFormControlSelect1">User Group</label>
+        <select 
+        class="form-control" 
+        name="person_group_id" 
+        #userGroup="ngModel" 
+        [ngClass]="{'is-invalid':userGroup.errors}"
+        [(ngModel)]="user.person_group_id"
+        >
+          <option  *ngFor="let group of groups" [value]="group.id">{{ group.name }}</option>
+        </select>
+      </div>
+      <input *ngIf="groups?.length > 0;else noGroupsButtonDisabled" type="submit" value="Submit" class="btn btn-primary btn-block">
     </form>
   </div>
 </div>
+
+<ng-template #noGroupsSelect>
+  <hr>
+  <label>Loading groups from database...</label>
+</ng-template>
+
+<ng-template #noGroupsButtonDisabled>
+  <hr>
+<input disabled type="submit" value="Submit" class="btn btn-primary btn-block">
+</ng-template>

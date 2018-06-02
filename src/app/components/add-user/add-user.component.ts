@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
+import { GroupService } from '../../services/group.service';
+import { Group } from '../../models/Group';
 import { Observable } from 'rxjs';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { timeout } from 'q';
@@ -12,19 +14,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
+  groups: Group[];
   user: User = {
     username: '',
     email: '',
     password: '',
     person_group_id: 1
   }
+  isUserAdding: boolean = false;
 
   constructor(
     private flashMessage: FlashMessagesService,
     private router: Router,
     private userService: UserService,
+    private groupService: GroupService,
   ) { }
   ngOnInit() {
+    this.getGroups();
   }
   onSubmit({ value, valid }: { value: User, valid: boolean }) {
     if (!valid) {
@@ -32,12 +38,14 @@ export class AddUserComponent implements OnInit {
         cssClass: 'alert-danger', timeout: 4000
       });
     } else {
-      value.person_group_id = 1;
       this.userService.addUser(value);
-      this.flashMessage.show('New client added', {
-        cssClass: 'alert-success', timeout: 4000
-      });
-      this.router.navigate(['/'])
-    }
+      this.isUserAdding = true;
+  }
+  }
+  getGroups() {
+    this.groupService.getGroups().subscribe(groups => {
+       this.groups = groups;
+       console.log(this.groups);
+   });
   }
 }

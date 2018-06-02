@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { UserService } from './services/user.service';
+import { GroupService } from './services/group.service';
 import { UsersComponent } from './components/users/users.component';
 import { HttpClientModule } from '@angular/common/http';
 import { OrderModule } from 'ngx-order-pipe';
@@ -39,7 +40,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService, FlashMessagesService],
+  providers: [UserService, FlashMessagesService, GroupService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
