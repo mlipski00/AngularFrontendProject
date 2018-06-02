@@ -29,6 +29,9 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersURL);
   }
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(this.usersURL + `/${id}`);
+  }
 
   addUser(user: User) {
     console.log(user);
@@ -36,7 +39,7 @@ export class UserService {
       this.http.post<User>(this.usersURL, user, httpOptions)
       .toPromise()
       .then(resolve => {
-        this.flashMessage.show('New client added', {
+        this.flashMessage.show('New user added', {
           cssClass: 'alert-success', timeout: 4000
         });
         this.router.navigate(['/'])
@@ -49,8 +52,24 @@ export class UserService {
       });    
   })
   }
-
-
-
+  deleteUser(user: User | number) {
+    const id = typeof user === 'number' ? user : user.id;
+    return new Promise((resolve, reject) => {
+      this.http.delete<User>(this.usersURL + `/${id}`, httpOptions)
+      .toPromise()
+      .then(resolve => {
+        this.flashMessage.show('User ID '+ id +' deleted', {
+          cssClass: 'alert-success', timeout: 4000
+        });
+        this.router.navigate(['/'])
+      })
+      .catch(err => {
+        this.flashMessage.show(err.message, {
+          cssClass: 'alert-danger', timeout: 4000
+        });
+        this.router.navigate(['/'])
+      });  
+    })
+  }
 
 }

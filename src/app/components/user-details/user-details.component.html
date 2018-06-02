@@ -4,7 +4,7 @@
       <i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard
     </a>
   </div>
-  <div class="col-md-6">
+  <div *ngIf="user.email != ''"  [hidden]="isUserDeleting" class="col-md-6">
     <div class="btn-group pull-right">
       <a routerLink="/user/edit/{{ id }}" class="btn btn-dark">
         Edit
@@ -14,12 +14,19 @@
   </div>
 </div>
 <hr> 
-<div  class="card">
-  <h3 class="card-header"></h3>
+
+<div class="card">
+    <div [hidden]="!isUserDeleting" class="card-body">
+        <h3>Deleting user ID {{ userID }} from database...</h3>
+      </div>
+</div>
+
+<div *ngIf="user.email != '';else noUserLoaded" [hidden]="isUserDeleting" class="card">
+  <h3 class="card-header">{{ user.username }} </h3>
   <div class="card-body">
     <div class="row">
       <div class="cold-md-8 col-sm-6">
-        <h4>User ID: </h4>
+        <h4>User ID: {{ user.id }}</h4>
       </div>
       <div class="cold-md-8 col-sm-6">
         <h3 class="pull-right">
@@ -37,8 +44,13 @@
 
     <hr>
     <ul class="list-group">
-      <li class="list-group-item">Contact Email: </li>
-      <li class="list-group-item">Contact Phone: </li>
+      <li class="list-group-item">Email: {{ user.email }} </li>
+      <li class="list-group-item">User Group: {{ user.person_group_id }} </li>
     </ul>
   </div>
 </div>
+
+<ng-template #noUserLoaded>
+    <hr>
+    <h3>Loading user ID {{ userID }} from database...</h3>
+</ng-template>
