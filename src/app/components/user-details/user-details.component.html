@@ -1,3 +1,5 @@
+
+<app-edit-user  *ngIf="isUserEditing"></app-edit-user>
 <div class="row">
   <div class="col-md-6">
     <a routerLink="/" class="btn btn-link">
@@ -6,9 +8,8 @@
   </div>
   <div *ngIf="user.email != ''"  [hidden]="isUserDeleting" class="col-md-6">
     <div class="btn-group pull-right">
-      <a routerLink="/user/edit/{{ id }}" class="btn btn-dark">
-        Edit
-      </a>
+      <button (click)="isUserEditing = !isUserEditing" [ngClass]="{'btn-warning': isUserEditing, 'btn-dark': !isUserEditing}"  class="btn">Edit</button>
+
       <button (click)="onDeleteClick()" class="btn btn-danger">Delete</button>
     </div>
   </div>

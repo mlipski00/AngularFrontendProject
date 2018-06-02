@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
 import { GroupService } from '../../services/group.service';
@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { timeout } from 'q';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-user',
@@ -22,6 +23,7 @@ export class AddUserComponent implements OnInit {
     person_group_id: 1
   }
   isUserAdding: boolean = false;
+  @ViewChild('userForm') form: any;
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -31,6 +33,7 @@ export class AddUserComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.getGroups();
+    
   }
   onSubmit({ value, valid }: { value: User, valid: boolean }) {
     if (!valid) {
@@ -48,4 +51,8 @@ export class AddUserComponent implements OnInit {
        console.log(this.groups);
    });
   }
+  resetForm() {
+    this.form.reset();
+  }
+
 }

@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserDetailsComponent implements OnInit {
   isUserDeleting: boolean = false;
+  isUserEditing: boolean = false;
   userID: number;
   user: User = {
     username: '',
@@ -39,5 +40,8 @@ export class UserDetailsComponent implements OnInit {
   onDeleteClick() {
     this.userService.deleteUser(this.user.id);
     this.isUserDeleting = true;
+  }
+  onEditClick() {
+    this.isUserEditing = true;
   }
 }

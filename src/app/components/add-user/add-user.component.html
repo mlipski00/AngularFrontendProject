@@ -2,6 +2,7 @@
   <div class="col-md-6">
     <a routerLink="/" class="btn btn-link">
       <i class="fa fa-arrow-circle-o-left"></i> Back To Users</a>
+      
   </div>
   <div class="col-md-6">
 
@@ -10,16 +11,19 @@
 
 <div class="card">
     <div [hidden]="!isUserAdding" class="card-body">
-        <h3>Deleting user from database...</h3>
+        <h3>Adding user to database...</h3>
       </div>
 </div>
 
 <div [hidden]="isUserAdding" class="card">
   <div  class="card-header">
-    Add User
+    <h3>Add User
+      <button (click)="resetForm(userForm)" class="btn btn-warning float-right">Reset form</button>
+    </h3>
+    
   </div>
   <div class="card-body">
-    <form  #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
       <div class="form-group">
         <label for="username">User Name</label>
         <input type="text" class="form-control" 
@@ -29,7 +33,7 @@
           [(ngModel)]="user.username" 
           minlength="2" required>
         <div [hidden]="!userName.errors?.required" class="invalid-feedback">
-          User name required
+          User name is required
         </div>
         <div [hidden]="!userName.errors?.minlength" class="invalid-feedback">
           Must be at least 2 characters
@@ -40,7 +44,7 @@
         <input type="text" class="form-control" name="email" #userEmail="ngModel" [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"
           [(ngModel)]="user.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
         <div [hidden]="!userEmail.errors?.required" class="invalid-feedback">
-          Email required
+          Email is required
         </div>
         <div [hidden]="!userEmail.errors?.pattern" class="invalid-feedback">
           Email is not valid
@@ -67,11 +71,14 @@
         class="form-control" 
         name="person_group_id" 
         #userGroup="ngModel" 
-        [ngClass]="{'is-invalid':userGroup.errors}"
+        [ngClass]="{'is-invalid':userGroup.errors && userGroup.touched}"
         [(ngModel)]="user.person_group_id"
-        >
+        required>
           <option  *ngFor="let group of groups" [value]="group.id">{{ group.name }}</option>
         </select>
+        <div [hidden]="!userGroup.errors?.required" class="invalid-feedback">
+          User group is required
+        </div>
       </div>
       <input *ngIf="groups?.length > 0;else noGroupsButtonDisabled" type="submit" value="Submit" class="btn btn-primary btn-block">
     </form>
