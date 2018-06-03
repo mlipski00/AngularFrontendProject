@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { User } from '../../models/User';
 import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
+ 
   isUserDeleting: boolean = false;
   isUserEditing: boolean = false;
   userID: number;

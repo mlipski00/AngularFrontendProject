@@ -1,9 +1,9 @@
 
-<app-edit-user  *ngIf="isUserEditing"></app-edit-user>
+<app-edit-user *ngIf="isUserEditing" [user]="user" [userID]="userID"></app-edit-user>
 <div class="row">
   <div class="col-md-6">
-    <a routerLink="/" class="btn btn-link">
-      <i class="fa fa-arrow-circle-o-left"></i> Back to Dashboard
+    <a [hidden]="isUserEditing" routerLink="/" class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Back to Users
     </a>
   </div>
   <div *ngIf="user.email != ''"  [hidden]="isUserDeleting" class="col-md-6">

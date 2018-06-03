@@ -52,6 +52,26 @@ export class UserService {
       });    
   })
   }
+
+  updateUser(user: User) {
+    console.log(user);
+    return new Promise((resolve, reject) => {
+      this.http.put<User>(this.usersURL + `/${user.id}`, user, httpOptions)
+      .toPromise()
+      .then(resolve => {
+        this.flashMessage.show('User updated', {
+          cssClass: 'alert-success', timeout: 4000
+        });
+        this.router.navigate(['/'])
+      })
+      .catch(err => {
+        this.flashMessage.show(err.message, {
+          cssClass: 'alert-danger', timeout: 4000
+        });
+        this.router.navigate(['/'])
+      });    
+  })
+  }
   deleteUser(user: User | number) {
     const id = typeof user === 'number' ? user : user.id;
     return new Promise((resolve, reject) => {
