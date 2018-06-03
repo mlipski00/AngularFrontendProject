@@ -17,7 +17,7 @@
 
 <div [hidden]="isUserAdding" class="card">
   <div  class="card-header">
-    <h3>Add User
+    <h3>Edit User ID: {{ user.id }}
       <button (click)="resetForm(userForm)" class="btn btn-warning float-right">Reset form</button>
     </h3>
     
@@ -76,6 +76,7 @@
         #userGroup="ngModel" 
         [ngClass]="{'is-invalid':userGroup.errors && userGroup.touched}"
         [(ngModel)]="user.person_group_id"
+        minlength="1"
         required>
           <option  *ngFor="let group of groups" [value]="group.id">{{ group.name }}</option>
         </select>
@@ -84,7 +85,7 @@
         </div>
       </div>
       <input type="hidden" [(ngModel)]="user.id" name="id">
-      <input *ngIf="groups?.length > 0;else noGroupsButtonDisabled" type="submit" value="Submit" class="btn btn-primary btn-block">
+      <input *ngIf="groups?.length > 0;else noGroupsButtonDisabled" type="submit" value="Update user ID: {{ user.id }}" class="btn btn-primary btn-block">
     </form>
   </div>
 </div>

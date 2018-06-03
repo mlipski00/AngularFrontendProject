@@ -19,6 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrderModule } from 'ngx-order-pipe';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FilterPipe } from './utilities/filter.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,8 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
     LoginComponent,
     RegisterComponent,
     NotFoundComponent,
-    UsersComponent
+    UsersComponent,
+    FilterPipe
   ],
   imports: [
     OrderModule,

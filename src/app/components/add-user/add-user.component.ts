@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { timeout } from 'q';
 import { Router } from '@angular/router';
+import { error } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class AddUserComponent implements OnInit {
   }
   }
   getGroups() {
-    this.groupService.getGroups().subscribe(groups => {
+    this.groupService.getGroups()
+    .subscribe(groups => {
        this.groups = groups;
        console.log(this.groups);
    });

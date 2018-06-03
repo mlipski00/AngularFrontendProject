@@ -1,3 +1,9 @@
 <a routerLink="/user/add" class="btn btn-success btn-block">
   <i class="fa fa-plus"></i> New User
   </a>
+  <button (click)="downloadPDF()" class="btn btn-secondary btn-block">
+   <i class="fa fa-file-pdf-o"></i> Generate PDF
+  </button>
+  <button (click)="toggleSearch()" [ngClass]="{'btn-warning': isSearching, 'btn-primary': !isSearching}"class="btn btn-block">
+  <i class="fa fa-search"></i> Search
+</button>

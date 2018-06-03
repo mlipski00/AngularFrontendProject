@@ -10,7 +10,6 @@ const httpOptions = {
     'Content-Type': 'application/json'
 })
 }
-
 @Injectable({
   providedIn: 'root'
 })
@@ -24,4 +23,5 @@ export class GroupService {
   getGroups() : Observable<Group[]> {
     return this.http.get<Group[]>(this.groupsURL);
   }
+
 }

@@ -11,9 +11,10 @@ import { Observable } from 'rxjs';
 export class UsersComponent implements OnInit {
   users: User[];
   order: string = 'id';
-
+  isSearching: boolean = false;
+  
   constructor(private userService: UserService) { }
-
+  
   ngOnInit() {
     this.getUsers();
   }
@@ -23,4 +24,11 @@ export class UsersComponent implements OnInit {
        this.users = users;
    });
   }
+  toggleSearchUserComponent() {
+    if (this.isSearching) {
+      this.isSearching = false 
+    } else {
+      this.isSearching = true
+    } return this.isSearching;
+  }  
 }

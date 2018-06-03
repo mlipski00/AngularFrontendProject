@@ -77,7 +77,7 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this.http.delete<User>(this.usersURL + `/${id}`, httpOptions)
       .toPromise()
-      .then(resolve => {
+      .then(() => {
         this.flashMessage.show('User ID '+ id +' deleted', {
           cssClass: 'alert-success', timeout: 4000
         });

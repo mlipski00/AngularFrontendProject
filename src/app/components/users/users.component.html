@@ -1,3 +1,11 @@
+<div class="form-group row" [hidden]="!isSearching">
+    
+    <div class="col-sm-6">
+    <h5>Search by User Name</h5>
+    
+    <input [(ngModel)]="searchText" placeholder="Search" type="text" class="form-control">
+</div>
+</div>
 <div class="row">
   <div class="col-md-10">
 
@@ -18,7 +26,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users | orderBy: order">
+          <!-- orderBy: order -->
+        <tr *ngFor="let user of users | filter : searchText">
           <td> {{ user.id }} </td>
           <td> {{ user.username }} </td>
           <td> {{ user.email }} </td>
