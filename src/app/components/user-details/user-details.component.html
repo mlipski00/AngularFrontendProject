@@ -31,7 +31,7 @@
       </div>
       <div class="cold-md-8 col-sm-6">
         <h3 class="pull-right">
-          Number of solutions:
+          Number of solutions: {{ solutionsCount }}
           <span
             [class.text-success]=""
             [class.text-danger]=""
@@ -50,8 +50,45 @@
     </ul>
   </div>
 </div>
+<!-- solution table -->
+<div *ngIf="solutionsCount != -1;else noSolutionsLoaded">
+<div *ngIf="solutionsCount > 0;else noSolutions" class="card">
+  <div class="card-body">
+  <h5 class="card-header">Solutions</h5>
 
+
+
+    <table class="table table-striped">
+      <thead class="thead-inverse">
+        <tr>
+          <th (click)="filterBy('id')">Solution ID</th>
+          <th (click)="filterBy('created')" >Created</th>
+          <th (click)="filterBy('updated')">Updated</th>
+          <th (click)="filterBy('description')">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <!-- orderBy: order -->
+        <tr *ngFor="let solution of solutions | orderBy: order : reverse : true">
+          <td> {{ solution.id }} </td>
+          <td> {{ solution.created }} </td>
+          <td> {{ solution.updated }} </td>
+          <td> {{ solution.description }} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
 <ng-template #noUserLoaded>
     <hr>
     <h3>Loading user ID {{ userID }} from database...</h3>
+</ng-template>
+
+<ng-template #noSolutionsLoaded>
+</ng-template>
+
+<ng-template #noSolutions>
+  <hr>
+  <h5>User doesn't have solutions</h5>
 </ng-template>

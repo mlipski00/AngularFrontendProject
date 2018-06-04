@@ -15,19 +15,19 @@
           <i class="fa fa-users"></i> Users</h2>
       </div>
     </div>
-    <table *ngIf="users?.length > 0;else noUsers" class="table table-striped">
+    <table id="#myTable" *ngIf="users?.length > 0;else noUsers" class="table table-striped">
       <thead class="thead-inverse">
         <tr>
-          <th>User ID</th>
-          <th>User Name</th>
-          <th>Email</th>
-          <th>User Group</th>
+          <th (click)="filterBy('id')">User ID</th>
+          <th (click)="filterBy('username')" >User Name</th>
+          <th (click)="filterBy('email')">Email</th>
+          <th (click)="filterBy('person_group_id')">User Group</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
           <!-- orderBy: order -->
-        <tr *ngFor="let user of users | filter : searchText">
+        <tr *ngFor="let user of users | filter : searchText | orderBy: order : reverse : true">
           <td> {{ user.id }} </td>
           <td> {{ user.username }} </td>
           <td> {{ user.email }} </td>

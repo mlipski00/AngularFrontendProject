@@ -12,11 +12,16 @@ export class UsersComponent implements OnInit {
   users: User[];
   order: string = 'id';
   isSearching: boolean = false;
-  
-  constructor(private userService: UserService) { }
+  reverse: boolean = false;
+
+  constructor(
+    private userService: UserService,
+    
+  ) { }
   
   ngOnInit() {
     this.getUsers();
+
   }
 
   getUsers() {
@@ -24,6 +29,7 @@ export class UsersComponent implements OnInit {
        this.users = users;
    });
   }
+
   toggleSearchUserComponent() {
     if (this.isSearching) {
       this.isSearching = false 
@@ -31,4 +37,14 @@ export class UsersComponent implements OnInit {
       this.isSearching = true
     } return this.isSearching;
   }  
+  filterBy(filterBy: any) {
+    if (filterBy === this.order) {
+      if (this.reverse) {
+        this.reverse = false 
+      } else {
+        this.reverse = true
+      }
+    }
+    this.order = filterBy;
+  }
 }

@@ -12,9 +12,11 @@ for (let index = 0; index < items.length; index++) {
   if (items[index].username.toLowerCase().includes(searchText)) {
     filteredItems.push(items[index]);
   }
+  // items.filter( it => {
+  //   console.log(it);
+    //toLowerCase().includes(searchText)
+//  });
 } return filteredItems;
-// return items.filter( it => {
-//       return it.toLowerCase().;
-//     });
+
    }
 }
