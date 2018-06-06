@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-10">
+  
+      <div class="row">
+        <div class="col-md-6">
+          <h2>
+            <i class="fa fa-address-card"></i> Groups</h2>
+        </div>
+      </div>
+      <table id="#myTable" *ngIf="groups?.length > 0;else noGroupsLoaded" class="table table-striped">
+        <thead class="thead-inverse">
+          <tr>
+        <th >Group ID</th>
+        <th >Name</th>
+      </tr>
+    </thead>
+    <tbody>
+        <!-- orderBy: order -->
+      <tr *ngFor="let group of groups | orderBy: order : reverse : true">
+        <td> {{ group.id }} </td>
+        <td> {{ group.name }} </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+
+<ng-template #noGroupsLoaded>
+  <hr>
+  <h5>Loading groups from database...</h5>
+</ng-template>

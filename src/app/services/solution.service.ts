@@ -22,4 +22,8 @@ export class SolutionService {
   getSolution(userID): Observable<Solution[]> {
     return  this.http.get<Solution[]>(this.solutionURL + `/user/${userID}`);
   }
+
+  getAllSolution(): Observable<Solution[]> {
+    return  this.http.get<Solution[]>(this.solutionURL);
+  }
 }

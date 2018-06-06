@@ -5,13 +5,16 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
 import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  contentPDF: string = 'User List:\n'
   isSearching: boolean = false;
+
   users: User[];
   constructor(
     private usersComponent: UsersComponent,
@@ -28,8 +31,16 @@ export class SidebarComponent implements OnInit {
   downloadPDF() {
     this.userService.getUsers().subscribe(users => {
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
-    var docDefinition = { content: 'Users in JSON Format: ' + `${JSON.stringify(users)}` };
-    pdfMake.createPdf(docDefinition).download('generatedPDF.pdf');
-      })
-    }
+      var counter = 1;
+      users.forEach(user => {
+        this.contentPDF += counter + ".  User Name: " + user.username + "  User Email: " + user.email + ',\n';
+        counter++;
+      });
+      console.log(this.contentPDF)
+      var docDefinition = { content: `${this.contentPDF}` };
+      pdfMake.createPdf(docDefinition).download('generatedPDF.pdf');
+      this.usersComponent.toggleIsGeneratingPDF()
+    })
+    this.usersComponent.toggleIsGeneratingPDF()
+  }
 }

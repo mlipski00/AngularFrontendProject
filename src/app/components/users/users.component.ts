@@ -13,6 +13,7 @@ export class UsersComponent implements OnInit {
   order: string = 'id';
   isSearching: boolean = false;
   reverse: boolean = false;
+  isPDFGenerating: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -46,5 +47,12 @@ export class UsersComponent implements OnInit {
       }
     }
     this.order = filterBy;
+  }
+  toggleIsGeneratingPDF() {
+    if (this.isPDFGenerating) {
+      this.isPDFGenerating = false;
+    } else {
+      this.isPDFGenerating = true;
+    }
   }
 }

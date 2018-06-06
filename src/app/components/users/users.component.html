@@ -6,6 +6,13 @@
     <input [(ngModel)]="searchText" placeholder="Search" type="text" class="form-control">
 </div>
 </div>
+
+<div class="form-group row" [hidden]="!isPDFGenerating">
+
+  <h5>Generating PDF File...</h5>
+
+</div>
+
 <div class="row">
   <div class="col-md-10">
 

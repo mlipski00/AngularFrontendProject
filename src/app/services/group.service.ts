@@ -16,7 +16,6 @@ const httpOptions = {
 export class GroupService {
   groupsURL: string = 'http://mlipski.site:8080/Workshop3WS/webapi/group';
   groups: Observable<Group[]>;
-  group: Observable<Group>;
 
   constructor(private http: HttpClient) { }
 
