@@ -54,7 +54,7 @@
         <label for="password">Password</label>
         <input type="password" 
         class="form-control" 
-        name="phone" 
+        name="password" 
         #userPassword="ngModel" 
         [ngClass]="{'is-invalid':userPassword.errors && userPassword.touched}"
         [(ngModel)]="user.password" minlength="8" required>

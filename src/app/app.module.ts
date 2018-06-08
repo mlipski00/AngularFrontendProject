@@ -17,7 +17,7 @@ import { GroupService } from './services/group.service';
 import { SolutionService } from './services/solution.service';
 import { ExerciseService } from './services/exercise.service'; 
 import { UsersComponent } from './components/users/users.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { OrderModule } from 'ngx-order-pipe';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -26,6 +26,7 @@ import { SolutionsComponent } from './components/solutions/solutions.component';
 import { GroupsComponent } from './components/groups/groups.component';
 import { ExercisesComponent } from './components/exercises/exercises.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LoginService } from './services/login.service';
 
 
 @NgModule({
@@ -59,7 +60,14 @@ import { FooterComponent } from './components/footer/footer.component';
     FlashMessagesService, 
     GroupService, 
     SolutionService,
-    ExerciseService
+    ExerciseService,
+    LoginService,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: LoginService,
+    //   multi: true
+    // }
+
   ],
   bootstrap: [AppComponent]
 })

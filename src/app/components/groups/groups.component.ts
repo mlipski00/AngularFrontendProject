@@ -9,6 +9,7 @@ import { GroupService } from '../../services/group.service';
 })
 export class GroupsComponent implements OnInit {
   private groups: Group[];
+  private order: string = 'id';
 
 
   constructor(private groupService: GroupService) { }

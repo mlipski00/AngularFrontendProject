@@ -9,6 +9,7 @@ import { Exercise } from './../../models/Exercise';
 })
 export class ExercisesComponent implements OnInit {
   private exercises: Exercise[];
+  private order: string = 'id';
 
   constructor(private exerciseService: ExerciseService) { }
 

@@ -8,8 +8,9 @@ import { SolutionService } from '../../services/solution.service';
   styleUrls: ['./solutions.component.css']
 })
 export class SolutionsComponent implements OnInit {
-  isSolutionsLoaded: boolean = false;
-  solutions: Solution[];
+  private isSolutionsLoaded: boolean = false;
+  private solutions: Solution[];
+  private order: string = 'id';
 
   constructor(    
     private solutionService: SolutionService
