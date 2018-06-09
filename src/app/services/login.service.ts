@@ -18,6 +18,7 @@ export class LoginService {
   base64: string;
   encoded: string;
   httpOptions: any;
+  isUserLogged: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -42,6 +43,9 @@ export class LoginService {
     this.login();
   }
 
+  isLogged():boolean {
+    return this.isUserLogged;
+  }
   login() {
     console.log(this.httpOptions);
     console.log(this.encoded);
@@ -53,7 +57,8 @@ export class LoginService {
             cssClass: 'alert-success', timeout: 5000
           });
           console.log("udało się")
-          
+          this.isUserLogged = true;
+          this.router.navigate(['/']);
         })
         .catch(err => {
           this.flashMessage.show("Incorect login or password", {

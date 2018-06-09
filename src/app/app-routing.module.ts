@@ -12,17 +12,18 @@ import { SolutionsComponent } from './components/solutions/solutions.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ExercisesComponent } from './components/exercises/exercises.component';
 import { GroupsComponent } from './components/groups/groups.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  { path: '', component: UsersComponent,  },
+  { path: '', component: UsersComponent, canActivate:[LoginGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent, },
-  { path: 'user/add', component: AddUserComponent, },
-  { path: 'user/edit/:id', component: EditUserComponent, },
-  { path: 'user/:id', component: UserDetailsComponent },
-  { path: 'exercises', component: ExercisesComponent},
-  { path: 'groups', component: GroupsComponent},
-  { path: 'solutions', component: SolutionsComponent},
+  { path: 'register', component: AddUserComponent },
+  { path: 'user/add', component: AddUserComponent, canActivate:[LoginGuard] },
+  { path: 'user/edit/:id', component: EditUserComponent, canActivate:[LoginGuard] },
+  { path: 'user/:id', component: UserDetailsComponent, canActivate:[LoginGuard] },
+  { path: 'exercises', component: ExercisesComponent, canActivate:[LoginGuard] },
+  { path: 'groups', component: GroupsComponent, canActivate:[LoginGuard] },
+  { path: 'solutions', component: SolutionsComponent, canActivate:[LoginGuard] },
   { path: '**', component: NotFoundComponent },
 
 ];
@@ -32,6 +33,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes)
   ],
-  declarations: []
+  providers: [LoginGuard]
 })
 export class AppRoutingModule { }
