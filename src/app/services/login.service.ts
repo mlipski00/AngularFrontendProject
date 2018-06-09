@@ -5,70 +5,63 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic MDYwODIwMThAd3AucGw6cGFzc3dvcmQ='
-  })
-}
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  returnedValue: Observable<String>
+  // userLogin: string = '06082018@wp.pl';
+  // userPassword: string = 'password'
+    // base64: string = "MDYwODIwMThAd3AucGw6cGFzc3dvcmQ";
+  userLogin: string;
+  userPassword: string;
   loginURL: string = 'http://mlipski.site:8080/Workshop3WS/webapi/secured/login';
+  base64: string;
+  encoded: string;
+  httpOptions: any;
 
-  // intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-  //   const cloned = req.clone( {
-  //     headers: req.headers.set("Authorization", "Basic dXNlcjpwYXNzd29yZA==")
-  //   });
-    
-  //   return next.handle(cloned);
-
-  // }
-
-	// intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-	// 	if (req.responseType == 'json') {
-	// 		req = req.clone({ responseType: 'text' });
-
-	// 		return next.handle(req).pipe(map(response => {
-	// 			if (response instanceof HttpResponse) {
-	// 				response = response.clone<any>({ body: JSON.parse(response.body) });
-	// 			}
-
-	// 			return response;
-	// 		}));
-	// 	}
-
-	// 	return next.handle(req);
-	// }
-  
   constructor(
     private http: HttpClient,
     private flashMessage: FlashMessagesService,
     private router: Router,
   ) { }
 
+  encodeUserCredentialsAndLogin(userLogin, userPassword) {
+    this.userLogin = userLogin;
+    this.userPassword = userPassword;
+    console.log(this.userLogin);
+    console.log(this.userPassword);
+    this.base64 = this.userLogin+':'+this.userPassword
+    this.encoded = btoa(this.base64);
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + this.encoded
+      })
+    }
+    this.login();
+  }
+
   login() {
-    console.log(httpOptions)
+    console.log(this.httpOptions);
+    console.log(this.encoded);
     return new Promise((resolve, reject) => {
-      this.http.post<String>(this.loginURL, "", httpOptions)
+      this.http.post<String>(this.loginURL, "", this.httpOptions)
         .toPromise()
         .then(resolve => {
-          this.flashMessage.show('Fixed ping with basic auth header successed', {
-            cssClass: 'alert-success', timeout: 10000
+          this.flashMessage.show('Login successed', {
+            cssClass: 'alert-success', timeout: 5000
           });
           console.log("udało się")
+          
         })
         .catch(err => {
-          this.flashMessage.show(err.message, {
-            cssClass: 'alert-danger', timeout: 10000
+          this.flashMessage.show("Incorect login or password", {
+            cssClass: 'alert-danger', timeout: 5000
           });
           console.log(err.message)
         })
     }
     );
   }
-
 }

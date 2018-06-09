@@ -32,7 +32,8 @@
               "./node_modules/popper.js/dist/umd/popper.js",
               "./node_modules/bootstrap/dist/js/bootstrap.js",
               "./node_modules/datatables.net/js/jquery.dataTables.js",
-              "./node_modules/pdfmake/build/pdfmake.min.js"
+              "./node_modules/pdfmake/build/pdfmake.min.js",
+              "./node_modules/base-64/base64.js"
             ]
           },
           "configurations": {

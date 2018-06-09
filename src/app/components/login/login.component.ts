@@ -6,11 +6,14 @@ import { LoginService } from './../../services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginResponse: String;
+  userLogin: string;
+  userPassword: string;
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
-    this.loginService.login();
+    
   }
-
+  onSubmit() {
+    this.loginService.encodeUserCredentialsAndLogin(this.userLogin, this.userPassword);
+  }
 }
