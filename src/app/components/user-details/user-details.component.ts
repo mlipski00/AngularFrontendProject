@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Solution } from '../../models/Solution';
 import { SolutionService } from '../../services/solution.service';
+import { LoginService } from '../../services/login.service';
 @Component({
   selector: 'app-user-details',
   templateUrl: './user-details.component.html',
@@ -23,11 +24,13 @@ export class UserDetailsComponent implements OnInit {
   };
   order: string = 'id';
   reverse: boolean = false;
+  canDelete: boolean = true;
 
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private solutionService: SolutionService
+    private solutionService: SolutionService,
+    private loginService: LoginService
   ) { }
 
   ngOnInit() {
@@ -42,6 +45,10 @@ export class UserDetailsComponent implements OnInit {
   getUsers(userID: number) {
     this.userService.getUser(userID).subscribe(user => {
       this.user = user;
+      console.log('local compare ' + this.user.email.localeCompare(this.loginService.getUserLogin()));
+      if (this.user.email.localeCompare(this.loginService.getUserLogin()) === 0) {
+        this.canDelete = false;
+      }
     });
   }
   getSolutions(userID) {
@@ -53,8 +60,12 @@ export class UserDetailsComponent implements OnInit {
    });
   }
   onDeleteClick() {
-    this.userService.deleteUser(this.user.id);
-    this.isUserDeleting = true;
+    if(this.canDelete) {
+      this.userService.deleteUser(this.user.id);
+      this.isUserDeleting = true;
+    } else {
+      alert("You can't delete logged user");
+    }
   }
   onEditClick() {
     this.isUserEditing = true;

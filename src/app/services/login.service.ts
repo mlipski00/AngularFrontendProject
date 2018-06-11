@@ -33,6 +33,9 @@ export class LoginService {
       this.isUserLogged = JSON.parse(localStorage.getItem('isUserLogged'));
     }
   }
+  getUserLogin(): string {
+    return JSON.parse(localStorage.getItem('currentUserLogged'));
+  }
 
   getIsUserLogged(): boolean {
     return this.isUserLogged;
