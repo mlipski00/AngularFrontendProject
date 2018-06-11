@@ -52,7 +52,7 @@ import { LoginService } from './services/login.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     UserService, 
@@ -61,6 +61,8 @@ import { LoginService } from './services/login.service';
     SolutionService,
     ExerciseService,
     LoginService,
+    NavbarComponent,
+    UsersComponent
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: LoginService,

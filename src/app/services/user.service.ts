@@ -45,9 +45,10 @@ export class UserService {
         this.router.navigate(['/'])
       })
       .catch(err => {
-        this.flashMessage.show(err.message, {
+        this.flashMessage.show('Email already exists in database', {
           cssClass: 'alert-danger', timeout: 4000
         });
+        console.log(err.message);
         this.router.navigate(['/'])
       });    
   })
@@ -65,9 +66,10 @@ export class UserService {
         this.router.navigate(['/'])
       })
       .catch(err => {
-        this.flashMessage.show(err.message, {
+        this.flashMessage.show('Something gone wrong. Call admin please.', {
           cssClass: 'alert-danger', timeout: 4000
         });
+        console.log(err.message);
         this.router.navigate(['/'])
       });    
   })
@@ -84,9 +86,10 @@ export class UserService {
         this.router.navigate(['/'])
       })
       .catch(err => {
-        this.flashMessage.show(err.message, {
+        this.flashMessage.show('Something gone wrong. Call admin please.', {
           cssClass: 'alert-danger', timeout: 4000
         });
+        console.log(err.message);
         this.router.navigate(['/'])
       });  
     })

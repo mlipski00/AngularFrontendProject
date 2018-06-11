@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
 import { Observable } from 'rxjs';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-users',
@@ -12,22 +13,24 @@ export class UsersComponent implements OnInit {
   users: User[];
   order: string = 'id';
   isSearching: boolean = false;
+  isLogged: boolean = false;
   reverse: boolean = false;
   isPDFGenerating: boolean = false;
 
   constructor(
     private userService: UserService,
-    
+    private navbarComponent: NavbarComponent
   ) { }
   
   ngOnInit() {
     this.getUsers();
-
+    //this.isLogged = this.navbarComponent.userIsLogged();
   }
 
   getUsers() {
     this.userService.getUsers().subscribe(users => {
        this.users = users;
+       //this.navbarComponent.userIsLogged();
    });
   }
 

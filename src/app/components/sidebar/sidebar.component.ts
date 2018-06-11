@@ -31,6 +31,7 @@ export class SidebarComponent implements OnInit {
   downloadPDF() {
     this.userService.getUsers().subscribe(users => {
       pdfMake.vfs = pdfFonts.pdfMake.vfs;
+      console.log(users);
       var counter = 1;
       users.forEach(user => {
         this.contentPDF += counter + ".  User Name: " + user.username + "  User Email: " + user.email + ',\n';

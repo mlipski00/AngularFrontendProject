@@ -20,13 +20,24 @@
             </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li [hidden]="isUserLogged" class="nav-item">
           <a routerLink="/register" class="nav-link">Register</a>
         </li>
-        <li class="nav-item">
+        <li [hidden]="!isUserLogged" class="nav-item">
+         <a href="#" class="nav-link">Logged user: {{ userLogin }}</a>
+        </li>
+        <li [hidden]="isUserLogged" class="nav-item">
           <a routerLink="/login" class="nav-link">Login</a>
+        </li>
+        <li (click)="LogOut()"  class="nav-item" [hidden]="isLogged">
+          <a  href="" [hidden]="!isUserLogged" class="nav-link">Logout</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<ng-template #noUsers>
+  <hr>
+  <h5>Loading users from database...</h5>
+</ng-template>

@@ -13,8 +13,8 @@ export class LoginGuard implements CanActivate {
     ) { }
 
     canActivate(): boolean {
-        console.log(this.loginService.isLogged())
-        if (this.loginService.isLogged()) {
+        console.log(this.loginService.isLoggedService())
+        if (this.loginService.isLoggedService()) {
             return true;
         }
         this.router.navigate(['/login']);
