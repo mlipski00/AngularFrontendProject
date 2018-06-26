@@ -1,3 +1,5 @@
 # AngularFrontendProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
+### Project is available online: http://mlipski.site:8080/AngularFrontendProject
+#### Project provides web frontend built in Angular6 framework using Workshop3-REST-API endpoints (other project on my GitHub). 
+For testing purposes please create your own user using Register service.
